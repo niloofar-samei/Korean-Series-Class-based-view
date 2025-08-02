@@ -49,10 +49,10 @@ class MovieCreateView(View):
 
         if all([movie_form.is_valid(), actor_form.is_valid(), actress_form.is_valid()]):
             movie = movie_form.save()
-            actress = actress_form.save()
+            actress = actress_form.save(commit=False)
             actress.movie = movie
             actress.save()
-            actor = actor_form.save()
+            actor = actor_form.save(commit=False)
             actor.movie = movie
             actor.save()
 
