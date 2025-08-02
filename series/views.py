@@ -5,10 +5,18 @@ from django.db.models import F
 from series.forms import ActorForm, ActressForm, MovieForm
 from .models import Movie
 
+from django.views.generic import ListView
 
-def index(request):
-    movie_list = Movie.objects.all().order_by("-voteup")
-    return render(request, "series/index.html", {"movie_list": movie_list})
+
+class IndexListView(ListView):
+    model = Movie
+    template_name = "series/index.html"
+    context_object_name = "movies"
+
+
+# def index(request):
+#    movie_list = Movie.objects.all().order_by("-voteup")
+#    return render(request, "series/index.html", {"movie_list": movie_list})
 
 
 def movie(request, movie_id):
