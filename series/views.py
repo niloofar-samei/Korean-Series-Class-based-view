@@ -29,17 +29,6 @@ class MovieDetailView(DetailView):
         return context
 
 
-def movie(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-    actor = movie.actor_set.all()
-    actress = movie.actress_set.all()
-    return render(
-        request,
-        "series/movie.html",
-        {"movie": movie, "actor": actor, "actress": actress},
-    )
-
-
 class MovieCreateView(View):
     def get(self, request):
         return render(
