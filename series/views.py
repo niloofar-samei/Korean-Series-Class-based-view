@@ -88,6 +88,32 @@ class MovieCreateView(View):
             },
         )
 
+    def post(self, request):
+        movie_form = MovieForm(request.POST, request.FILES)
+        actor_form = ActorForm(request.POST, request.FILES)
+        actress_form = ActressForm(request.POST, request.FILES)
+
+        if all([movie_form.is_valid(), actor_form.is_valid(), actress_form.is_valid()]):
+            movie = movie_form.save()
+            actress = actress_form.save()
+            actress.movie = movie
+            actress.save()
+            actor = actor_form.save()
+            actor.movie = movie
+            actor.save()
+
+            return redirect("IndexListView")
+
+        return render(
+            request,
+            "series/new_movie_django_form.html",
+            {
+                "form_movie": MovieForm(),
+                "form_actor": ActorForm(),
+                "form_actress": ActressForm(),
+            },
+        )
+
 
 # def new_django_form(request):
 #    if request.method == "POST":
