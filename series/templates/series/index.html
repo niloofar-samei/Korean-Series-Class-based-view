@@ -6,13 +6,13 @@
 
 <a href="{% url 'MovieCreateView' %}" style="color: red; margin-left: 10px">Add by django form</a>
 
-    {% if movie_list %}
+    {% if movies %}
 
         <ul style="margin-top: 20px">
-            {% for movie in movie_list %}
+            {% for movie in movies %}
 
                 <li>
-                  <a href="{% url 'movie' movie.id %}">{{ movie.movie_name }}</a>
+                  {% comment %}<a href="{% url 'movie' movie.id %}">{{ movie.movie_name }}</a>{% endcomment %}
                   ({{ movie.released_year }}) - <i>{{ movie.voteup }} Vote{{movie.voteup|pluralize}}</i>
                 </li>
 
