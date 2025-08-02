@@ -2,10 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.db.models import F
+from django.urls import reverse_lazy
 from series.forms import ActorForm, ActressForm, MovieForm
 from .models import Movie
 
-from django.views.generic import DetailView, ListView, DetailView
+from django.views.generic import DeleteView, DetailView, ListView, DetailView
 from django.views import View
 
 
@@ -68,15 +69,19 @@ class MovieCreateView(View):
         )
 
 
-def delete(request, movie_id):
-    print(movie_id)
-    selected_movie = Movie.objects.get(pk=movie_id)
-    selected_movie.delete()
-    return redirect("index")
+class MovieDeleteView(DeleteView):
+    model = Movie
+    success_url = reverse_lazy("IndexListView")
+
+    # This block helps to delete without ask for confirmation.
+    def get(self, rquest, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        return redirect(self.success_url)
 
 
-def voteup(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-    movie.voteup = F("voteup") + 1
-    movie.save()
-    return redirect("index")
+# def voteup(request, movie_id):
+#    movie = get_object_or_404(Movie, pk=movie_id)
+#    movie.voteup = F("voteup") + 1
+#    movie.save()
+#    return redirect("index")
