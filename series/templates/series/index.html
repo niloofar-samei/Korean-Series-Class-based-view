@@ -4,8 +4,7 @@
 
 <h1>Top Korean Series With Popularity</h1>
 
-<a href="{% url 'new'%}">Add a new movie</a>
-<a href="{% url 'new_django_form'%}" style="color: red; margin-left: 10px">Add by django form</a>
+<a href="{% url 'MovieCreateView' %}" style="color: red; margin-left: 10px">Add by django form</a>
 
     {% if movie_list %}
 
