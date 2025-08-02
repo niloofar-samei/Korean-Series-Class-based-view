@@ -5,7 +5,7 @@ from django.db.models import F
 from series.forms import ActorForm, ActressForm, MovieForm
 from .models import Movie
 
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView, DetailView
 from django.views import View
 
 
@@ -14,6 +14,19 @@ class IndexListView(ListView):
     template_name = "series/index.html"
     context_object_name = "movies"
     ordering = ["-voteup"]
+
+
+class MovieDetailView(DetailView):
+    model = Movie
+    template_name = "series/movie.html"
+    context_object_name = "movie"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        movie = self.object
+        context["actress"] = movie.actress_set.all()
+        context["actor"] = movie.actor_set.all()
+        return context
 
 
 def movie(request, movie_id):
