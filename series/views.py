@@ -80,8 +80,9 @@ class MovieDeleteView(DeleteView):
         return redirect(self.success_url)
 
 
-# def voteup(request, movie_id):
-#    movie = get_object_or_404(Movie, pk=movie_id)
-#    movie.voteup = F("voteup") + 1
-#    movie.save()
-#    return redirect("index")
+class VoteupDetailView(DetailView):
+    def post(self, request, movie_id):
+        movie = get_object_or_404(Movie, pk=movie_id)
+        movie.voteup = F("voteup") + 1
+        movie.save()
+        return redirect("IndexListView")
