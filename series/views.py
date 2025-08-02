@@ -13,6 +13,7 @@ class IndexListView(ListView):
     model = Movie
     template_name = "series/index.html"
     context_object_name = "movies"
+    ordering = ["-voteup"]
 
 
 # def index(request):
