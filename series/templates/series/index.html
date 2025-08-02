@@ -1,0 +1,29 @@
+{% extends "series/base.html" %}
+
+{% block content %}
+
+<h1>Top Korean Series With Popularity</h1>
+
+<a href="{% url 'new'%}">Add a new movie</a>
+<a href="{% url 'new_django_form'%}" style="color: red; margin-left: 10px">Add by django form</a>
+
+    {% if movie_list %}
+
+        <ul style="margin-top: 20px">
+            {% for movie in movie_list %}
+
+                <li>
+                  <a href="{% url 'movie' movie.id %}">{{ movie.movie_name }}</a>
+                  ({{ movie.released_year }}) - <i>{{ movie.voteup }} Vote{{movie.voteup|pluralize}}</i>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+    <p>No movie is available.</p>
+
+        {% endif %}
+
+    {% endblock %}

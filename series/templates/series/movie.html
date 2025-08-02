@@ -1,0 +1,61 @@
+{% extends "series/base.html"%}
+
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card" style="width: 18rem; margin-left: auto; margin-right: auto">
+      <img class="card-img-top" src="{{ movie.movie_image.url }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ movie.movie_name }} ({{ movie.released_year }})</h5>
+
+            <p class="card-text">
+
+              {{ movie.movie_about }}
+
+            </p>
+
+            <div class="row" style="text-align: center">
+              <div class="col-sm-6">
+                <a href="{% url 'voteup' movie.id %}" class="card-link">Vote Up</a>
+              </div>
+              <div class="col-sm-6">
+                <a href="{% url 'delete' movie.id %}">Delete</a>
+              </div>
+            </div>
+
+            <div class="row" style="text-align: center; margin-top: 10px">
+              <div class="col-sm-12">
+                <a href="{% url 'index'%}">Back to main page</a>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+  {% for each in actress %}
+  <div class="col-sm-3">
+  <img class="card-img-top" src="{{ each.actress_image.url }}" alt="Card image cap" style="border-radius: 100px; width:130px; margin-left: auto; margin-right: auto; margin-top: 20px; display: block">
+  <p style="margin-top: 10px; text-align: center">
+
+        <i>{{ each }}</i>
+  </p>
+  </div>
+  {% endfor %}
+
+  {% for each in actor %}
+  <div class="col-sm-3">
+  <img class="card-img-top" src="{{ each.actor_image.url }}" alt="Card image cap" style="border-radius: 100px; width:130px; margin-left: auto; margin-right: auto; margin-top: 20px; display: block">
+  <p style="margin-top: 10px; text-align: center">
+
+        <i>{{ each }}</i>
+  </p>
+  </div>
+  {% endfor %}
+
+
+
+{% endblock %}

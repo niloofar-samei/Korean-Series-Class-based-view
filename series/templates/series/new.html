@@ -1,0 +1,77 @@
+{% extends "series/base.html" %}
+
+{% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+    {% if message.tags == "success" %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% else %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<form action="{% url 'new' %}" method="POST" enctype="multipart/form-data" style="max-width: 550px; padding: 15px; margin-left: auto; margin-right: auto">
+  {% csrf_token %}
+
+  <div class="form-group" class="col-xs-4">
+    <label for="movie" style="margin-bottom: 10px">Movie:</label>
+    <input type="text" name="movie" class="form-control form-control-lg" id="movie" style="margin-bottom: 10px">
+  </div>
+
+  <div class="form-group">
+    <label for="year" style="margin-bottom: 10px">Released Year:</label>
+    <input type="text" name="year" class="form-control form-control-lg" id="year" style="margin-bottom: 10px">
+  </div>
+
+  <div class="form-group" class="col-xs-4">
+    <label for="movie_about" style="margin-bottom: 10px">About movie:</label>
+    <input type="text" name="movie_about" class="form-control form-control-lg" id="movie_about" style="margin-bottom: 10px">
+  </div>
+
+  <div class="form-group">
+    <label for="actress" style="margin-bottom: 10px">Actress name:</label>
+    <input type="text" name="actress" class="form-control form-control-lg" id="actress" style="margin-bottom: 10px">
+  </div>
+
+  <div class="form-group">
+    <label for="actor" style="margin-bottom: 10px">Actor name:</label>
+    <input type="text" name="actor" class="form-control form-control-lg" id="actor" style="margin-bottom: 10px">
+  </div>
+
+<div class="row">
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="actress_image" style="margin-bottom: 10px">Actress image:</label>
+    <input type="file" name="actress_image" id="actress_image" style="margin-top: 20px; margin-bottom: 30px">
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="actor_image" style="margin-bottom: 10px">Actor image:</label>
+    <input type="file" name="actor_image" id="actor_image" style="margin-top: 20px; margin-bottom: 30px">
+  </div>
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-sm-6">
+  <div class="form-group">
+    <label for="movie_image" style="margin-bottom: 10px">Movie image:</label>
+    <input type="file" name="movie_image" id="actress_image" style="margin-top: 20px; margin-bottom: 30px">
+  </div>
+</div>
+
+</div>
+
+  <button type="submit" class="btn btn-primary">Save</button>
+  <a href="{% url 'index'%}" style="margin-left: 20px">Back to main page</a>
+</form>
+
+{% endblock %}
