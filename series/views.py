@@ -16,11 +16,6 @@ class IndexListView(ListView):
     ordering = ["-voteup"]
 
 
-# def index(request):
-#    movie_list = Movie.objects.all().order_by("-voteup")
-#    return render(request, "series/index.html", {"movie_list": movie_list})
-
-
 def movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     actor = movie.actor_set.all()
@@ -69,52 +64,6 @@ class MovieCreateView(View):
                 "form_actress": ActressForm(),
             },
         )
-
-
-# def new_django_form(request):
-#    if request.method == "POST":
-#        form_movie = MovieForm(request.POST, request.FILES)
-#        form_actress = ActressForm(request.POST, request.FILES)
-#        form_actor = ActorForm(request.POST, request.FILES)
-#        if form_movie.is_valid() and form_actress.is_valid() and form_actor.is_valid():
-#            movie = form_movie.save()
-#
-#            actress = form_actress.save(commit=False)
-#            actress.movie = movie
-#            actress.save()
-#
-#            actor = form_actor.save(commit=False)
-#            actor.movie = movie
-#            actor.save()
-#
-#            return redirect("index")
-#        else:
-#            form_movie = MovieForm()
-#            form_actress = ActressForm()
-#            form_actor = ActorForm()
-#            return render(
-#                request,
-#                "series/new_django_form.html",
-#                {
-#                    "form_movie": form_movie,
-#                    "form_actress": form_actress,
-#                    "form_actor": form_actor,
-#                },
-#            )
-#
-#    else:
-#        form_movie = MovieForm()
-#        form_actress = ActressForm()
-#        form_actor = ActorForm()
-#    return render(
-#        request,
-#        "series/new_django_form.html",
-#        {
-#            "form_movie": form_movie,
-#            "form_actress": form_actress,
-#            "form_actor": form_actor,
-#        },
-#    )
 
 
 def delete(request, movie_id):
