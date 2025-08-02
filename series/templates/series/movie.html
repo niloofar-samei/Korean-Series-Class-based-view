@@ -18,7 +18,7 @@
 
             <div class="row" style="text-align: center">
               <div class="col-sm-6">
-                {% comment %}<a href="{% url 'voteup' movie.id %}" class="card-link">Vote Up</a>{% endcomment %}
+                <a href="{% url 'VoteupView' movie.id %}" class="card-link">Vote Up</a>
               </div>
               <div class="col-sm-6">
                 <a href="{% url 'MovieDeleteView' movie.id %}">Delete</a>

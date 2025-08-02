@@ -6,7 +6,13 @@ from django.urls import reverse_lazy
 from series.forms import ActorForm, ActressForm, MovieForm
 from .models import Movie
 
-from django.views.generic import DeleteView, DetailView, ListView, DetailView
+from django.views.generic import (
+    DeleteView,
+    DetailView,
+    ListView,
+    DetailView,
+    CreateView,
+)
 from django.views import View
 
 
@@ -30,7 +36,7 @@ class MovieDetailView(DetailView):
         return context
 
 
-class MovieCreateView(View):
+class MovieCreateView(CreateView):
     def get(self, request):
         return render(
             request,
@@ -80,7 +86,7 @@ class MovieDeleteView(DeleteView):
         return redirect(self.success_url)
 
 
-class VoteupView(view):
+class VoteupView(View):
     def post(self, request, movie_id):
         movie = get_object_or_404(Movie, pk=movie_id)
         movie.voteup = F("voteup") + 1
