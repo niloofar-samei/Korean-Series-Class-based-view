@@ -36,7 +36,7 @@ class MovieDetailView(DetailView):
         return context
 
 
-class MovieCreateView(CreateView):
+class MovieCreateView(View):
     def get(self, request):
         return render(
             request,
@@ -87,8 +87,8 @@ class MovieDeleteView(DeleteView):
 
 
 class VoteupView(View):
-    def post(self, request, movie_id):
-        movie = get_object_or_404(Movie, pk=movie_id)
+    def post(self, request, pk):
+        movie = get_object_or_404(Movie, pk=pk)
         movie.voteup = F("voteup") + 1
         movie.save()
         return redirect("IndexListView")
